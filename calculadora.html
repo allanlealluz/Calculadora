@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='calculadora.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Calculator</title>
+</head>
+<body>
+    <div style='border:1px solid black;width:50%; height:50%;' class='container justify-content-center'>
+        <div id='result' class='bg-success comntainer-fluid'>0</div>      
+        <div class='row'>
+        <button id='1' onclick='SalvarNumero(this.id)'>1</button>
+        <button id='2' onclick='SalvarNumero(this.id)'>2</button>
+        <button id='3' onclick='SalvarNumero(this.id)'>3</button>
+        <button id = 'mais'onclick='DefinirOperacao(this.id)'>+</button>
+    </div>
+    <div class='row'>
+        <button id='4' onclick='SalvarNumero(this.id)'>4</button>
+        <button id='5' onclick='SalvarNumero(this.id)'>5</button>
+        <button id='6' onclick='SalvarNumero(this.id)'>6</button>
+        <button id = 'menos' onclick='DefinirOperacao(this.id)'>-</button>
+    </div>
+    <div class='row'>
+        <button id='7' onclick='SalvarNumero(this.id)'>7</button> 
+        <button id='8' onclick='SalvarNumero(this.id)'>8</button>
+        <button id='9' onclick='SalvarNumero(this.id)'>9</button>
+        <button id = 'dividir'onclick='DefinirOperacao(this.id)'>/</button>
+    </div>
+    <div class='row'>
+        <button id='0' onclick='SalvarNumero(this.id)'>0</button>                     
+        <button id = 'multiplicar'onclick='DefinirOperacao(this.id)'>*</button>
+        <button id = 'igual' onclick='Calcular()'>=</button>
+        <button id='clears' onclick='Clear()'>CE</button>
+    </div>
+    </div>
+<script>
+    numeros = ''
+    operacao = ''
+    resul = 0
+    function SalvarNumero(n){
+        n = document.getElementById(n).innerHTML
+        numeros += n
+        result.innerHTML = n
+    }
+
+    function DefinirOperacao(o){
+        numeros1 = numeros
+        numeros = ''
+        console.log('numeros1 '+numeros1)
+        o = document.getElementById(o).innerHTML
+        operacao = o
+        result.innerHTML = o
+    }
+    function Calcular(){ 
+        result = document.getElementById('result')
+        if(numeros1 != ''){
+         console.log('valor de num ao calcular'+numeros)  
+         console.log('valor de num1 ao calcular'+numeros1)        
+         if(operacao == '+'){
+            resul += parseFloat(numeros1) + parseFloat(numeros)           
+         }else if(operacao == '-'){
+            resul += parseFloat(numeros1) - parseFloat(numeros)
+         }else if(operacao == '*'){
+            resul += parseFloat(numeros1) * parseFloat(numeros)
+         }else if(operacao == '/'){
+            resul /=  parseFloat(numeros)
+         }
+         console.log(resul)
+         result.innerHTML = resul  
+         numeros = ''
+         numeros1 = ''  
+    }else if(resul > 0){
+        if(operacao == '+'){
+            resul += parseFloat(numeros)           
+         }else if(operacao == '-'){
+            resul -=  parseFloat(numeros)
+         }else if(operacao == '*'){
+            resul *=  parseFloat(numeros)
+         }else if(operacao == '/'){
+            resul /=  parseFloat(numeros)
+         }
+         console.log(resul)  
+         result.innerHTML = resul  
+         numeros = ''
+         numeros1 = ''
+    }
+}
+</script> 
+</body>
+</html>
