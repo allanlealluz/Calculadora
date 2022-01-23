@@ -37,57 +37,38 @@
     </div>
     </div>
 <script>
-    numeros = ''
-    operacao = ''
-    resul = 0
+   numeros = ''
+   operacao = ''
+   resul = 0
+   val = []
     function SalvarNumero(n){
         n = document.getElementById(n).innerHTML
         numeros += n
-        result.innerHTML = n
+        Mostrar(n)
     }
-
+    function Mostrar(v){
+        val.push(v)
+        result.innerHTML = val.join('')
+    }
+    function Clear(){
+        result = 0
+        val.clear()
+    }
     function DefinirOperacao(o){
         numeros1 = numeros
         numeros = ''
         console.log('numeros1 '+numeros1)
         o = document.getElementById(o).innerHTML
         operacao = o
-        result.innerHTML = o
+        Mostrar(o)
     }
     function Calcular(){ 
         result = document.getElementById('result')
-        if(numeros1 != ''){
-         console.log('valor de num ao calcular'+numeros)  
-         console.log('valor de num1 ao calcular'+numeros1)        
-         if(operacao == '+'){
-            resul += parseFloat(numeros1) + parseFloat(numeros)           
-         }else if(operacao == '-'){
-            resul += parseFloat(numeros1) - parseFloat(numeros)
-         }else if(operacao == '*'){
-            resul += parseFloat(numeros1) * parseFloat(numeros)
-         }else if(operacao == '/'){
-            resul /=  parseFloat(numeros)
-         }
-         console.log(resul)
-         result.innerHTML = resul  
-         numeros = ''
-         numeros1 = ''  
-    }else if(resul > 0){
-        if(operacao == '+'){
-            resul += parseFloat(numeros)           
-         }else if(operacao == '-'){
-            resul -=  parseFloat(numeros)
-         }else if(operacao == '*'){
-            resul *=  parseFloat(numeros)
-         }else if(operacao == '/'){
-            resul /=  parseFloat(numeros)
-         }
-         console.log(resul)  
-         result.innerHTML = resul  
-         numeros = ''
-         numeros1 = ''
+        if(result.innerHTML.length > 0){
+        result.innerHTML =  eval(result.innerHTML)
+        }
     }
-}
+
 </script> 
 </body>
 </html>
