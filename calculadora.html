@@ -7,68 +7,94 @@
     <link rel='stylesheet' href='calculadora.css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Calculator</title>
+    <style>
+        .calculator {
+            border: 1px solid black;
+            width: 50%;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #result {
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            width: 25%;
+            margin: 5px 0;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div style='border:1px solid black;width:50%; height:50%;' class='container justify-content-center'>
-        <div id='result' class='bg-success comntainer-fluid'>0</div>      
+    <div class='container calculator'>
+        <div id='result' class='bg-success container-fluid'>0</div>      
         <div class='row'>
-        <button id='1' onclick='SalvarNumero(this.id)'>1</button>
-        <button id='2' onclick='SalvarNumero(this.id)'>2</button>
-        <button id='3' onclick='SalvarNumero(this.id)'>3</button>
-        <button id = 'mais'onclick='DefinirOperacao(this.id)'>+</button>
-    </div>
-    <div class='row'>
-        <button id='4' onclick='SalvarNumero(this.id)'>4</button>
-        <button id='5' onclick='SalvarNumero(this.id)'>5</button>
-        <button id='6' onclick='SalvarNumero(this.id)'>6</button>
-        <button id = 'menos' onclick='DefinirOperacao(this.id)'>-</button>
-    </div>
-    <div class='row'>
-        <button id='7' onclick='SalvarNumero(this.id)'>7</button> 
-        <button id='8' onclick='SalvarNumero(this.id)'>8</button>
-        <button id='9' onclick='SalvarNumero(this.id)'>9</button>
-        <button id = 'dividir'onclick='DefinirOperacao(this.id)'>/</button>
-    </div>
-    <div class='row'>
-        <button id='0' onclick='SalvarNumero(this.id)'>0</button>                     
-        <button id = 'multiplicar'onclick='DefinirOperacao(this.id)'>*</button>
-        <button id = 'igual' onclick='Calcular()'>=</button>
-        <button id='clears' onclick='Clear()'>CE</button>
-    </div>
+            <button id='1' class='btn btn-primary' onclick='SalvarNumero(this.id)'>1</button>
+            <button id='2' class='btn btn-primary' onclick='SalvarNumero(this.id)'>2</button>
+            <button id='3' class='btn btn-primary' onclick='SalvarNumero(this.id)'>3</button>
+            <button id='mais' class='btn btn-secondary' onclick='DefinirOperacao(this.id)'>+</button>
+        </div>
+        <div class='row'>
+            <button id='4' class='btn btn-primary' onclick='SalvarNumero(this.id)'>4</button>
+            <button id='5' class='btn btn-primary' onclick='SalvarNumero(this.id)'>5</button>
+            <button id='6' class='btn btn-primary' onclick='SalvarNumero(this.id)'>6</button>
+            <button id='menos' class='btn btn-secondary' onclick='DefinirOperacao(this.id)'>-</button>
+        </div>
+        <div class='row'>
+            <button id='7' class='btn btn-primary' onclick='SalvarNumero(this.id)'>7</button>
+            <button id='8' class='btn btn-primary' onclick='SalvarNumero(this.id)'>8</button>
+            <button id='9' class='btn btn-primary' onclick='SalvarNumero(this.id)'>9</button>
+            <button id='dividir' class='btn btn-secondary' onclick='DefinirOperacao(this.id)'>/</button>
+        </div>
+        <div class='row'>
+            <button id='0' class='btn btn-primary' onclick='SalvarNumero(this.id)'>0</button>
+            <button id='multiplicar' class='btn btn-secondary' onclick='DefinirOperacao(this.id)'>*</button>
+            <button id='igual' class='btn btn-success' onclick='Calcular()'>=</button>
+            <button id='clears' class='btn btn-danger' onclick='Clear()'>CE</button>
+        </div>
     </div>
 <script>
-   numeros = ''
-   operacao = ''
-   resul = 0
-   val = []
-    function SalvarNumero(n){
-        n = document.getElementById(n).innerHTML
-        numeros += n
-        Mostrar(n)
-    }
-    function Mostrar(v){
-        val.push(v)
-        result.innerHTML = val.join('')
-    }
-    function Clear(){
-        result = 0
-        val.clear()
-    }
-    function DefinirOperacao(o){
-        numeros1 = numeros
-        numeros = ''
-        console.log('numeros1 '+numeros1)
-        o = document.getElementById(o).innerHTML
-        operacao = o
-        Mostrar(o)
-    }
-    function Calcular(){ 
-        result = document.getElementById('result')
-        if(result.innerHTML.length > 0){
-        result.innerHTML =  eval(result.innerHTML)
-        }
+    let numeros = '';
+    let operacao = '';
+    let val = [];
+
+    function SalvarNumero(n) {
+        n = document.getElementById(n).innerHTML;
+        numeros += n;
+        Mostrar(n);
     }
 
-</script> 
+    function Mostrar(v) {
+        val.push(v);
+        document.getElementById('result').innerHTML = val.join('');
+    }
+
+    function Clear() {
+        numeros = '';
+        val = [];
+        document.getElementById('result').innerHTML = '0';
+    }
+
+    function DefinirOperacao(o) {
+        numeros = '';
+        operacao = document.getElementById(o).innerHTML;
+        Mostrar(operacao);
+    }
+
+    function Calcular() {
+        const result = document.getElementById('result');
+        if (result.innerHTML.length > 0) {
+            result.innerHTML = eval(result.innerHTML);
+            numeros = result.innerHTML;
+            val = [numeros];
+        }
+    }
+</script>
 </body>
 </html>
